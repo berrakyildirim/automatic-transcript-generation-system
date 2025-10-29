@@ -1,61 +1,140 @@
-# Course Scheduler (Python)
+#  Automatic Transcript Generation System (Team B)
 
-A Python-based course scheduling system that helps students build personalized weekly timetables without time conflicts. The program reads course data from a file, checks for overlapping schedules, and displays a clean, formatted timetable in the console.
+A Python-based transcript simulation and generation system that creates academic transcripts in both CSV and HTML formats.
+It models students’ semester-by-semester progress according to departmental curricula, applying realistic rules such as prerequisite control, credit limits, course retakes, and GPA/CGPA calculations.
 
-## Features
+# Team Members
+Name	Student	Main Contributions
+Damla Yıldız	Project integration, command-line argument management, GPA/CGPA logic, report writing
+Berrak Yıldırım	Advanced functions, prerequisite control, test and error management
+İhsan Efe Yücel	Project planning, database design, main module development
+Hande Sağlam	HTML formatter module, user interface, and visual design
 
-File Input: Automatically loads course information from a .txt file.
+## Project Overview
 
-Conflict Detection: Prevents overlapping course times.
+This system automatically generates academic transcripts for students by:
 
-Dynamic Updates: Add or remove courses easily.
+Simulating academic progress over up to 14 semesters,
 
-Timetable Visualization: Displays a clear weekday-hour table view.
+Assigning grades and calculating GPA/CGPA,
 
-User Interaction: Simple console-based interface.
+Enforcing prerequisites and credit limits,
 
-## How It Works
+Producing output files in CSV and formatted HTML.
 
-The program reads all courses from a file (e.g., courses.txt).
+It supports multiple departments (CS, ASE, EEE) and multiple curriculum versions (v1, v2, v3).
 
-The user selects which courses to add based on available slots.
+## Software Architecture
 
-Conflicting courses are automatically filtered out.
+The project is divided into two main Python modules:
 
-The final timetable and schedule are printed neatly at the end.
+main.py
 
-## Example Input File
+Processes command-line arguments (--student, --department, or --all)
 
-courses.txt
+Loads student and curriculum data from CSV files
 
-EEE 445,1,9,11,Monday
-CENG 213,2,11,13,Tuesday
-MATH 241,1,10,12,Wednesday
+Simulates each semester, assigns grades, computes GPA/CGPA
 
-## Example Output
-Welcome to the course scheduler!
+Exports transcript results to CSV files
 
-Available courses:
-EEE 445 (Section 1) on Monday: 9:00-11:00
-CENG 213 (Section 2) on Tuesday: 11:00-13:00
-...
+html_formater.py
 
-Final Timetable:
-Hour  Monday              Tuesday             Wednesday          
-8:00  Free                Free                Free
-9:00  EEE 445 (Section 1) Free                Free
-...
+Reads all generated transcript CSVs
 
-Final Schedule:
-Day       Time                Course (Section)
-----------------------------------------------
-Monday    9:00 - 11:00        EEE 445 (Section 1)
-Tuesday   11:00 - 13:00       CENG 213 (Section 2)
+Sorts and formats courses by semester
+
+Produces visually clean HTML transcripts for each student
 
 ## File Structure
-course_scheduler.py    # Main program file
-courses.txt            # Input data file
+transcript_project/
 
-## Author
+│
 
-Berrak Yıldırım, Part of a Team with İhsan Efe Yücel, Hande Sağlam and Damla Yıldız
+├── main.py
+
+├── html_formater.py
+
+├── student_transcripts/        # CSV transcript outputs
+
+├── html_transcripts/           # Formatted HTML transcripts
+
+├── updated_students_cs.csv
+
+├── updated_students_eee.csv
+
+├── updated_students_ase.csv
+
+├── cs_curriculum_v1.csv
+
+├── cs_curriculum_v2.csv
+
+├── cs_curriculum_v3.csv
+
+└── ...
+
+## Running the Program
+### Prerequisites
+
+Python 3.10+
+
+Required libraries installed (e.g., argparse, pandas)
+
+## Usage
+
+Run the following commands in the terminal from the project directory:
+
+### For a specific student
+python main.py --student <student_id>
+
+### For all students in a specific department
+python main.py --department <CS | ASE | EEE>
+
+### For all students in all departments
+python main.py --all
+
+
+### After execution, the system:
+
+Creates CSV transcripts under student_transcripts/
+
+Automatically converts them into HTML transcripts under html_transcripts/
+
+## System Testing
+
+The system was tested across:
+
+3 departments (CS, ASE, EEE)
+
+3 curriculum versions each (v1, v2, v3)
+
+Randomized student profiles and academic data
+
+## Verification Criteria:
+
+Prerequisite and credit limit enforcement
+
+GPA/CGPA accuracy
+
+Correct semester sequencing
+
+Proper HTML formatting
+
+Error handling for invalid data or missing files
+
+## Future Improvements
+
+Add PDF transcript export
+
+Develop a web interface for online transcript viewing
+
+Integrate data analytics for academic performance trends
+
+Improve grade assignment logic with weighted success models
+
+## Conclusion
+
+This project successfully models a realistic academic transcript generation system.
+It demonstrates strong modularity, scalability across departments, and compliance with academic standards for GPA/CGPA computation and prerequisite validation.
+
+Developed Damla Yıldız, Berrak Yıldırım, İhsan Efe Yücel, and Hande Sağlam
